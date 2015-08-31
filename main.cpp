@@ -67,6 +67,12 @@ bool saveBinary(std::string filename)
   return !!out;
 }
 
+glm::vec3 deriv_function(const glm::vec3& p)
+{
+  glm::vec3 ret_val(1.0f, 1.0f, 1.0f);
+
+  return ret_val;
+}
 
 int main() {
 
@@ -77,10 +83,12 @@ int main() {
   scene_bounds.max = glm::vec3(+2);
 
   glm::vec3 len = scene_bounds.max - scene_bounds.min;
+  glm::vec3 elem_dim(len.x / dims[0], len.y / dims[1], len.z / dims[2]);
 
-  for (size_t k = 0; k < dims[2]; k++){
-    for (size_t j = 0; j < dims[1]; j++){
-      for (size_t i = 0; i < dims[0]; i++){
+  // Setting the points velocities.
+  for (size_t k = 0; k <= dims[2]; k++){
+    for (size_t j = 0; j <= dims[1]; j++){
+      for (size_t i = 0; i <= dims[0]; i++){
 
         glm::vec3 p(static_cast<float>(i) / dims[0] * len[0], static_cast<float>(j) / dims[1] * len[1], static_cast<float>(k) / dims[2] * len[2]);
         p += scene_bounds.min;
